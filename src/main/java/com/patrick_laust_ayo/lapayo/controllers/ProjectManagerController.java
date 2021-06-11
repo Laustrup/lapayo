@@ -1,11 +1,11 @@
 package com.patrick_laust_ayo.lapayo.controllers;
 
-import com.patrick_laust_ayo.examproject.models.Participant;
-import com.patrick_laust_ayo.examproject.models.Project;
-import com.patrick_laust_ayo.examproject.models.ProjectManager;
-import com.patrick_laust_ayo.examproject.services.ExceptionHandler;
-import com.patrick_laust_ayo.examproject.services.ProjectCreator;
-import com.patrick_laust_ayo.examproject.services.UserCreator;
+import com.patrick_laust_ayo.lapayo.models.Participant;
+import com.patrick_laust_ayo.lapayo.models.Project;
+import com.patrick_laust_ayo.lapayo.models.ProjectManager;
+import com.patrick_laust_ayo.lapayo.services.ExceptionHandler;
+import com.patrick_laust_ayo.lapayo.services.ProjectCreator;
+import com.patrick_laust_ayo.lapayo.services.UserCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -17,7 +17,7 @@ public class ProjectController {
 
     private ProjectCreator projectCreator = new ProjectCreator();
     private ProjectEditor projectEditor = new ProjectEditor();
-    private com.patrick_laust_ayo.examproject.services.ExceptionHandler handler = new ExceptionHandler();
+    private ExceptionHandler handler = new ExceptionHandler();
 
     @PostMapping("/direct_to_create_project")
     public String directToCreateProject(HttpServletRequest request) {
