@@ -1,0 +1,11 @@
+/*
+Author Ayo
+ */
+header {
+    background-image: url("img/bluecirc.jpg");
+    background-size: 100%;
+    padding: 3px;
+}
+#header_title {
+    text-align: center;
+}

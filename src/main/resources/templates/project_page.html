@@ -1,0 +1,335 @@
+<!-- Authors Laust, Patrick and Ayo -->
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/project_page.css}">
+    <meta charset="UTF-8">
+    <title th:text="${session.projectTitle}">Project</title>
+</head>
+<body>
+
+<div class="header">
+    <h2 th:text="${project.getTitle()}"></h2>
+</div>
+<section class="split left">
+
+    <!-- PARTICIPANT FORM -->
+    <div th:if="${current_project eq 'start'}" class="participant_container">
+        <header><h3>Welcome</h3></header>
+        <section class="participant_form">
+            <form action="/project_page_update-participant_pressed" method="post">
+
+                <div class="ID_section">
+                    <label for="participant_ID">ID</label>
+                    <input type="text" id="participant_ID" name="participant_ID" th:placeholder="${participant.getId}">
+                </div>
+
+                <div class="password_section">
+                    <label for="participant_password">Password</label>
+                    <input type="password" id="participant_password" name="participant_password" th:placeholder="${participant.getHiddenPassword}">
+                </div>
+
+                <div class="name_section">
+                    <label for="participant_name">Name</label>
+                    <input type="text" id="participant_name" name="participant_name" th:placeholder="${participant.getName}">
+                </div>
+
+                <div class="position_section">
+                    <label for="position">Position</label>
+                    <input type="text" id="position" name="position" th:placeholder="${participant.getPosition}">
+                </div>
+
+                <div class="department_section">
+                    <label for="participant_update_department">Department:</label>
+                    <select name="department" id="participant_update_department">
+                        <option value="COPENHAGEN">COPENHAGEN</option>
+                        <option value="OSLO">OSLO</option>
+                        <option value="NEW YORK">NEW YORK</option>
+                        <option value="DALLAS">DALLAS</option>
+                        <option value="LOS ANGELES">LOS ANGELES</option>
+                    </select>
+                </div>
+
+                <p th:text="${Exception}"></p>
+
+                <button type="submit">Update participant</button>
+            </form>
+        </section>
+    </div>
+
+    <!--PROJECT BOX -->
+    <!-- FORM FOR UPDATING THE CURRENT PROJECT TITLE -->
+    <section class="project_form">
+        <div>
+            <div class="project_title_section">
+                <form action="/update_project" method="post">
+                    <label for="new_project_title"><h4>Project Title</h4></label>
+                    <input type="text" id="new_project_title" name="new_project_title" th:placeholder="${project.getTitle}" required>
+                    <button type="submit">Update title</button>
+                </form>
+            </div>
+            <!-- BUTTON FOR DIRECTING TO THE ADD PARTICIPANTS PAGE -->
+            <section class="direct_to_add_participants_section">
+                <div th:if="${current_project eq 'start'}">
+                    <form action="/direct_to_add_participants" method="post">
+                        <button type="submit">Go to add participants</button>
+                    </form>
+                </div>
+            </section>
+
+
+            <!--FORM FOR DELETING THE PROJECT (ONLY PROJECTMANAGER) -->
+            <div class="delete_project">
+                <form action="/direct_to_accept_delete" method="post">
+
+                    <label for="projectmanager_user_id"></label>
+                    <input type="text" name="projectmanager_user_id" id="projectmanager_user_id" placeholder="user_id">
+
+                    <label for="password_delete_project"></label>
+                    <input type="password" name="password_delete_verify" id="password_delete_project" placeholder="password">
+
+                    <button type="submit">Delete project</button>
+                </form>
+
+                <p><a href="/"><button>Go back to start menu</button></a></p>
+            </div>
+        </div>
+    </section>
+
+    <!--ADD PARTICIPANTS TO DEPARTMENT (PROJECTMANAGER ADDS) -->
+
+    <div th:if="${current_project eq 'add_participant'}"><header><h3><p th:text="${project.getTitle()}"></p></h3></header>
+        <section class="add_participants_form">
+
+            <p th:text="${Exception}"></p>
+
+            <form action="/add_participants" method="post">
+                <p>Amount of participants:</p>
+                <input type="number" name="amount">
+                <div>
+                    <label for="chosen_department">To department:</label>
+                    <select name="chosen_department" id="chosen_department">
+                        <option value="COPENHAGEN">COPENHAGEN</option>
+                        <option value="OSLO">OSLO</option>
+                        <option value="NEW YORK">NEW YORK</option>
+                        <option value="DALLAS">DALLAS</option>
+                        <option value="LOS ANGELES">LOS ANGELES</option>
+                    </select>
+                </div>
+                <button type="submit">Add participants</button>
+            </form>
+
+            <form action="/direct_project_page" method="post">
+                <button type="submit">Go back</button>
+            </form>
+        </section>
+    </div>
+
+</section>
+
+<!--RIGHT SIDE OF PAGE-->
+<section class="split right">
+
+    <!--PHASES BOX -->
+    <div th:if="${current eq 'phases'}">
+        <section class="phase">
+            <header><h3>Phases</h3></header>
+            <div class="phase_container">
+                <tr>
+                    <th>Estimated amount of work hours: <p th:text="${work_hours}"></p></th>
+                    <th>Estimated cost of project: <p th:text="${total_cost}"></p></th>
+                </tr>
+
+                <form action="/direct_to_phase" method="post">
+                    <ul th:each="phase : ${project.getPhases()}">
+                        <li><button type="submit" th:value="${phase.getTitle()}" name="phase_title"><p th:text="${phase.getTitle()}"></p></button></li>
+                    </ul>
+                </form>
+
+                <form action="/add_phase" method="post">
+                    <label for="new_assignment">New phase title: </label>
+                    <input type="text" id="new_assignment" name="phase_title" required>
+                    <button type="submit">Add new phase</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+
+    <div th:if="${current eq 'phase'}">
+        <section class="phase_options"><header><h3 th:text="${phase.getTitle()}"></h3></header>
+            <div class="phase_option_container">
+
+                <tr>
+                    <th>Estimated amount of work hours: <p th:text="${phase.getTotalWorkhours()}"></p></th></th>
+                    <th>Estimated cost of phase: <p th:text="${phase.getTotalCost()}"></p></th>
+                </tr>
+
+                <form action="/direct_to_assignment" method="post">
+                    <ul th:each="assignment : ${phase.getAssignments()}">
+                        <li><button type="submit" th:value="${assignment.getTitle()}" name="assignment_title"><p th:text="${assignment.getTitle()}"></p></button></li>
+                    </ul>
+                </form>
+
+                <div class="add_assignment">
+                    <form action="/add_assignment" method="post">
+                        <h4>Add new assignment</h4>
+                        <label for="new_assignment_title">Type title: </label>
+                        <input type="text" id="new_assignment_title" name="title" placeholder="title">
+                        <label for="new_assignment_start">Type start of assignment</label>
+                        <input type="text" id="new_assignment_start" name="start" placeholder="yyyy-mm-dd hh:mm:ss">
+                        <label for="new_assignment_end">Type deadline of assignment</label>
+                        <input type="text" id="new_assignment_end" name="end" placeholder="yyyy-mm-dd hh:mm:ss">
+                        <button type="submit">Add new assignment</button>
+                    </form>
+                    <p th:text="${Exception}"></p>
+                </div>
+                <div class="update_phase">
+                    <form action="/update_phase" method="post">
+                        <label for="phase_title">Phase Title</label>
+                        <input type="text" id="phase_title" name="phase_title" th:placeholder="${phase.getTitle()}" required>
+                        <button type="submit">Update title</button>
+                    </form>
+                </div>
+
+                <div>
+                    <p><a href="/accept_delete"><button>Delete phase</button></a></p>
+                    <form action="/direct_project_page" method="post">
+                        <button type="submit" th:value="${project.getTitle()}" name="project_title">Back to phases</pt></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ASSIGMENT BOX -->
+
+    <div th:if="${current eq 'assignment'}">
+        <section class="assignment"><header>Assignment<h3 th:text="${assignment.getTitle()}"></h3></header>
+            <div class="assignment_container">
+
+                <tr>
+                    <th>From: <p th:text="${assignment.getStart()}"></p></th>
+                    <th>To: <p th:text="${assignment.getEnd()}"></p></th>
+                    <th>Estimated amount of work hours: <p th:text="${assignment_work_hours}"></p></th></th>
+                    <th>Estimated cost of assignment: <p th:text="${assignment_total_cost}"></p></th>
+                </tr>
+
+                    <ul th:each="task : ${assignment.getTasks()}">
+                        <form action="/direct_to_task" method="post">
+
+                        <input type="text" th:value="${task.getStart()}" name="task_start" hidden>
+                        <input type="text" th:value="${task.getEnd()}" name="task_end" hidden>
+                        <li><button type="submit" th:value="${task.getTitle()}" name="task_title"><p th:text="${task.getTitle()}"></p>
+                            </pt></button></li>
+                        </form>
+                    </ul>
+
+                <h4>Type the following to add new task</h4>
+                <form action="/add_task" method="post">
+                    <input type="text" name="task_title" placeholder="Task title">
+                    <input type="text" name="task_start" placeholder="start yyyy-mm-dd hh:mm:ss">
+                    <input type="text" name="task_end" placeholder="end yyyy-mm-dd hh:mm:ss">
+                    <button type="submit">Add new task</button>
+                </form>
+
+                <form action="/update_assignment" method="post">
+                    <div class ="update_assignment">
+                        <label for="new_title">Change title</label>
+                        <input type="text" id="new_title" name="new_title">
+                        <label for="assignment_start">Change start of assignment</label>
+                        <input type="text" id="assignment_start" name="start">
+                        <label for="assignment_end">Change end of assignment</label>
+                        <input type="text" id="assignment_end" name="end">
+
+                        <button type="submit" th:value="${assignment.getTitle()}" name="assignment_title">Update assignment</button>
+                    </div>
+                </form>
+                <p th:text="${Exception}"></p>
+
+                <form action="/change_assignment_is_completed_status" method="post">
+                    <button type="submit"><p th:text="${assignment.IsCompletedAsAString()}"></p></button>
+                </form>
+
+                <div>
+                    <p><a href="/accept_delete"><button>Delete Assignment</button></a></p>
+                    <form action="/direct_to_phase" method="post">
+                        <button type="submit" th:value="${phase.getTitle()}" name="phase_title">Back to phases</pt></button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+
+
+    <!-- TASK BOX -->
+
+    <div th:if="${current eq 'task'}">
+        <section class="task">
+            <header>Task<h3 th:text="${task.getTitle()}"></h3></header>
+            <div class="task_container">
+
+                <tr>
+                    <th>From: <p th:text="${task.getStart()}"></p></th>
+                    <th>To: <p th:text="${task.getEnd()}"></p></th>
+                    <th>Estimated amount of work hours: <p th:text="${task.getEstimatedWorkHours()}"></p></th>
+                    <th>Estimated cost of task: <p th:text="${task_cost}"></p></th>
+                </tr>
+
+                <h5>Participants of this task are: </h5>
+                <div>
+                    <ul th:each="participant : ${task.getParticipants()}">
+                        <div>
+                            <li>Name: <p th:text="${participant.getName()}"></p></li>
+                            <li>User-id: <p th:text="${participant.getId()}"></p></li>
+                            <li>Position: <p th:text="${participant.getPosition()}"></p></li>
+                            <li>Department: <p th:text="${participant.getDepartment().getDepartmentName()}"></p></li>
+                        </div>
+                    </ul>
+                </div>
+
+                <form action="/update_task" method="post">
+                    <div class="update_task">
+                        <label for="task_new_title">Change title</label>
+                        <input type="text" id="task_new_title" name="new_title" placeholder="Title">
+                        <label for="task_start">Change start of task</label>
+                        <input type="text" id="task_start" name="task_start" placeholder="yyyy-mm-dd hh:mm:ss">
+                        <label for="task_end">Change end of task</label>
+                        <input type="text" id="task_end" name="task_end" placeholder="yyyy-mm-dd hh:mm:ss">
+                        <label for="task_work_hours">Change amount of workhours</label>
+                        <input type="text" id="task_work_hours" name="work_hours">
+
+                        <button type="submit">Update task</button>
+                    </div>
+                </form>
+                <p th:text="${Exception}"></p>
+
+                <form action="/change_task_is_completed_status" method="post">
+                    <button type="submit"><p th:text="${task.IsCompletedAsAString()}"></p></button>
+                </form>
+
+                <div>
+                    <p><a href="/accept_delete_of_task"><button>Delete task</button></a></p>
+                    <form action="/direct_to_assignment" method="post">
+                        <button type="submit" th:value="${phase.getTitle()}" name="phase_title">Back to assignment</button>
+                    </form>
+                </div>
+
+                <form action="/join-task" method="post">
+                    <input type="text" th:value="${task.getTitle()}" name="task_title" hidden>
+                    <input type="text" th:value="${task.getStart()}" name="task_start" hidden>
+                    <input type="text" th:value="${task.getEnd()}" name="task_end" hidden>
+                    <button type="submit">Join task</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+</section>
+</section>
+
+</main>
+</body>
+</html>

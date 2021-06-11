@@ -1,0 +1,200 @@
+/*
+Author Ayo
+ */
+.header h2 {
+    text-align: center;
+    background-color:#59869d;
+}
+button {
+    background-color: white;
+    padding: 8px;
+    cursor: pointer;
+    box-shadow: 3px 4px #888888;
+    font-size: 13px;
+    margin: 8px;
+}
+
+/* PROJECT PAGE */
+
+.split {
+    height: 100%;
+    width: 55%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+.left {
+    left: 0;
+    background-image: url("img/bluecirc.jpg");
+}
+.right {
+    right: 0;
+    background-image: url("img/bluecirc.jpg");
+}
+
+/* LEFT SIDE */
+
+/* PARTICIPANT BOX */
+
+.participant_container h3 {
+    text-align: center;
+}
+.participant_container {
+    background-color: blue;
+    background-image: linear-gradient(powderblue,steelblue);
+    border: 3px solid;
+    padding: 10px;
+    margin: 20px;
+    width: 65%;
+}
+.participant_form {
+    height: 170px;
+    position: relative;
+    border: 1px solid;
+    margin: 20px;
+    padding: 20px 20px 60px 20px;
+}
+.participant_container div {
+    margin: 7px;
+}
+/* PROJECT BOX */
+
+.project_form {
+    background-color: blue;
+    background-image: linear-gradient(powderblue,steelblue);
+    border: 3px solid;
+    padding: 10px;
+    margin: 20px;
+    width: 65%;
+}
+.project_title_section button {
+    display: block;
+}
+.project_container {
+    height: 170px;
+    position: relative;
+    border: 1px solid;
+    margin: 20px;
+    padding: 20px 20px 60px 20px;
+}
+.add_participants_form {
+    background-color: #ffab91;
+    border: 3px solid;
+    padding: 10px;
+    margin: 20px;
+    width: 65%;
+}
+.delete_project {
+    margin: 5% 0 0 0;
+}
+.delete_project button {
+    display: block;
+}
+
+/* ADD PARTICIPANTS BOX */
+
+.add_participants_form {
+    background-color: #59869d;
+    border: 3px solid;
+    padding: 10px;
+    margin: 20px;
+    width: 65%;
+}
+.add_participants_form div {
+    padding: 10px;
+}
+
+/*RIGHT SIDE*/
+
+/*PHASE BOX*/
+
+.phase {
+    margin: 20px;
+    width: 80%;
+    border: 3px solid;
+    padding: 10px;
+    background: #7FB3D5;
+}
+.phase header {
+    text-align: center;
+}
+.phase_container {
+    position: relative;
+    border: 1px solid;
+    margin: 20px;
+    padding: 20px 20px 60px 20px;
+}
+
+/* PHASE OPTIONS */
+
+.phase_options {
+    margin: 20px;
+    width: 80%;
+    border: 3px solid;
+    padding: 10px;
+    background: #7FB3D5;
+}
+.phase_option_container {
+    position: relative;
+    border: 1px solid;
+    margin: 20px;
+    padding: 20px 20px 60px 20px;
+}
+.add_assignment input{
+    display: block;
+}
+.update_phase {
+    margin: 20px 0 0 0;
+}
+.update_phase button {
+    display: block;
+}
+
+/*ASSIGNMENT BOX */
+
+.assignment {
+    margin: 20px;
+    width: 80%;
+    border: 3px solid;
+    padding: 10px;
+    background: #AFEEEE;
+}
+.assignment header {
+    text-align: center;
+}
+.assignment_container {
+    position: relative;
+    border: 1px solid;
+    margin: 20px;
+    padding: 20px 20px 60px 20px;
+}
+.update_assignment {
+    margin: 20px 0 0 0;
+}
+.update_assignment input{
+    display: block;
+}
+
+/* TASK BOX */
+
+.task {
+    margin: 20px;
+    width: 80%;
+    border: 3px solid;
+    padding: 10px;
+    background: #E0FFFF;
+}
+.task header {
+    text-align: center;
+}
+.task_container {
+    position: relative;
+    border: 1px solid;
+    margin: 20px;
+    padding: 20px 20px 60px 20px;
+}
+.update_task input {
+    display: block;
+}

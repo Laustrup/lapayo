@@ -1,0 +1,77 @@
+<!-- Author Laust -->
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/login_create.css}">
+    <title>Title</title>
+</head>
+
+<body>
+
+<header th:replace="fragments/header.html"></header>
+
+<main>
+    <div class="special_container">
+        <h3>Are you sure to delete <p th:text="${Object_to_delete}"></p></h3>
+
+        <div th:if="${current_delete eq 'participant'} ">
+            <form action="/delete_participant" method="Post">
+                <label for="user_id">Type userId</label>
+                <input type="text" id="user_id" name="user_id">
+                <label for="password">Type password</label>
+                <input type="password" id="password" name="password">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+
+        <div th:if="${current_delete eq 'project'} ">
+            <form action="/delete_project" method="Post">
+                <label for="user_id_project">Type userId</label>
+                <input type="text" id="user_id_project" name="user_id">
+                <label for="password_delete_project">Type password</label>
+                <input type="password" id="password_delete_project" name="password_delete_project">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+
+        <div th:if="${current_delete eq 'phase'} ">
+            <form action="/delete_phase" method="Post">
+                <label for="user_id_phase">Type userId</label>
+                <input type="text" id="user_id_phase" name="user_id">
+                <label for="password_phase">Type password</label>
+                <input type="password" id="password_phase" name="password">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+
+        <div th:if="${current_delete eq 'assignment'} ">
+            <form action="/delete_assignment" method="Post">
+                <label for="user_id_assignment">Type userId</label>
+                <input type="text" id="user_id_assignment" name="user_id">
+                <label for="password_assignment">Type password</label>
+                <input type="password" id="password_assignment" name="password">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+
+        <div th:if="${current_delete eq 'task'} ">
+            <form action="/delete_task" method="Post">
+                <label for="user_id_task">Type userId</label>
+                <input type="text" id="user_id_task" name="user_id">
+                <label for="password_task">Type password</label>
+                <input type="password" id="password_task" name="password">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+
+        <a href="/">Go back</a>
+
+        <p th:text="${Exception}"></p>
+    </div>
+</main>
+
+<footer th:replace="fragments/footer.html"></footer>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!-- Author Patrick -->
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/login_create.css}">
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<header th:replace="fragments/header.html"></header>
+
+<main>
+
+    <h1>Create New Project</h1>
+    <div class="flex-container">
+        <section id="create_project_form">
+
+            <form action="/create-project" method="post">
+
+                <div class="title_section">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Title" required>
+                </div>
+
+                <button type="submit">Create Project</button>
+                <p><a href="/index"><button>Go back</button></a></p>
+
+            </form>
+        </section>
+    </div>
+</main>
+
+<footer th:replace="fragments/footer.html"></footer>
+
+</body>
+</html>

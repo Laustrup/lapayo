@@ -1,0 +1,14 @@
+/*
+Author Ayo
+ */
+footer {
+    background-image: url("img/bluecirc.jpg");
+    background-size: 100%;
+    padding: 10px;
+}
+.footer_content{
+    text-align: center;
+}
+.footer_content a{
+    display: block;
+}
